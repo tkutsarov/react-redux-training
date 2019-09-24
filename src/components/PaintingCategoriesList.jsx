@@ -23,8 +23,8 @@ const PaintingCategoriesList = ({paintingCategories, addCategory, removeCategory
     return <React.Fragment>
         <ul>
             {
-                paintingCategories.map(category =>
-                    <PaintingCategory key={category.id}
+                paintingCategories.map((category, index) =>
+                    <PaintingCategory key={index}
                                       category={category}
                                       removeCategory={removeExistingCategory}
                     />
