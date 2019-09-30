@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 
 import PaintingCategory from './PaintingCategory';
 import { addNewPaintingCategory, removePaintingCategory } from '../actions';
+import getPictureCategories from '../api/getPictureCategories';
 
-const PaintingCategoriesList = ({paintingCategories, addCategory, removeCategory}) => {
+const PaintingCategoriesList = ({paintingCategories, addCategory, removeCategory, getCategory}) => {
     const addNewCategory = () => {
         const dummyCategories = ['trees', 'deserts', 'lakes', 'sunsets', 'forests', 'snow', 'cottages', 'cities'];
         const rand = dummyCategories[Math.floor(Math.random() * dummyCategories.length)];
@@ -32,6 +33,7 @@ const PaintingCategoriesList = ({paintingCategories, addCategory, removeCategory
             }
         </ul>
         <button className="add-btn" onClick={addNewCategory}>Add category</button>
+        <button className="btn" onClick={getCategory}>Add category through thunk</button>
     </React.Fragment>;
 };
 
@@ -42,7 +44,8 @@ PaintingCategoriesList.defaultProps = {
 PaintingCategoriesList.propTypes = {
     paintingCategories: PropTypes.array,
     addCategory: PropTypes.func,
-    removeCategory: PropTypes.func
+    removeCategory: PropTypes.func,
+    getCategory: PropTypes.func
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -54,7 +57,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
     return {
         addCategory: category => dispatch(addNewPaintingCategory(category)),
-        removeCategory: categoryId => dispatch(removePaintingCategory(categoryId))
+        removeCategory: categoryId => dispatch(removePaintingCategory(categoryId)),
+        getCategory: () => dispatch(getPictureCategories())
     }
 };
 
